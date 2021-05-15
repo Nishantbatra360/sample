@@ -1,1 +1,40 @@
-hello
+links=[[1,2],[1,3],[2,4],[3,4],[3,6],[6,7],[4,5]]
+
+def find_main_routers(links):
+    routers=[]
+        
+def is_important(router,links):
+    visionary_links=[]
+    for link in links:
+        if link[0]!=router and link[1]!=router:
+            visionary_links.append(link)
+    print(visionary_links)
+    
+    for router in range(7):
+        if(not is_connected_to_all(router+1,visionary_links)):
+            return True
+    return False
+    
+
+def is_connected_to_all(router,links):
+    direct_connections=get_direct_connections(router,links)
+    print(direct_connections)
+    return False
+    
+def get_direct_connections(router,links):
+    direct_connections=[]
+    for link in links:
+        if link[0]==router:
+            direct_connections.append(link[1])
+        elif link[1]==router:
+            direct_connections.append(link[0])
+    return direct_connections
+    
+def get_indirect_connections(router,links):
+    indirect_connections=[]
+    direct_connections=get_direct_connections(router,links)
+    for r in direct_connections:
+        indirect_connections=get_direct_connections(r,links)
+        
+#print(is_important(0,links))
+print(get_indirect_connections(3,links))
